@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduVista - Educational Video Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+        }
+        .video-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .hidden {
+            display: none;
+        }
+        .video-player {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 12px;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        .sidebar {
+            background-color: #1f2937;
+            color: white;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex-grow: 1;
+        }
+        .lesson-list {
+            margin-top: 20px;
+        }
+        .lesson-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #374151;
+        }
+        .lesson-item:hover {
+            background-color: #374151;
+        }
+        .quiz-question {
+            margin: 10px 0;
+        }
+        .quiz-option {
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+        .quiz-option.selected {
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 p-6 hidden lg:block">
+        <h2 class="text-xl font-bold mb-4">EduVista</h2>
+        <nav>
+            <ul>
+                <li><a href="#home" class="nav-link block py-2" onclick="showPage('home')">Home</a></li>
+                <li><a href="#videos" class="nav-link block py-2" onclick="showPage('videos')">Videos</a></li>
+                <li><a href="#" class="nav-link block py-2">Quizzes</a></li>
+                <li><a href="#" class="nav-link block py-2">Downloads</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content flex-1 p-6">
+        <!-- Header -->
+        <header class="mb-8 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome to EduVista</h1>
+            <div class="lg:hidden">
+                <button onclick="toggleSidebar()" class="bg-blue-500 text-white px-4 py-2 rounded">Menu</button>
+            </div>
+        </header>
+
+        <!-- Home Page -->
+        <section id="home" class="page">
+            <p class="text-lg mb-6">Explore a wide range of educational videos organized by topic. Click on a topic to watch and learn!</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video Topic Cards -->
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('math')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3251d26b-7f6f-431b-b53c-f4e8b302d0fc.png" alt="Mathematical equations and graphs on a chalkboard with colorful chalk and a calculator nearby representing algebra and geometry studies" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Mathematics</h3>
+                    <p class="text-gray-600">learn mathematics using this video.</p>
+                </div>
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('science')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4f820993-62eb-4751-b0b2-5ef5245511b0.png" alt="Laboratory setting with beakers, test tubes, and a microscope on a wooden table with plants and chemical reactions illustrating biology and chemistry principles" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Science</h3>
+                    <p class="text-gray-600">Learn science using this video.</p>
+                </div>
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('history')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7c985736-8839-4006-8c45-7140af394613.png" alt="Ancient manuscript pages, historical maps, and a replica of a parchment scroll on a library desk representing archaeology and historical events" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Social Science</h3>
+                    <p class="text-gray-600">leatn social science using this video.</p>
+                </div>
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('literature')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/78c6f574-921f-42c7-8dbe-07831f8ccc94.png" alt="Stacked books with open pages, a quill pen, and poetic verses written on parchment paper depicting prose and poetry writing" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Literature</h3>
+                    <p class="text-gray-600">read books and learn literature techniques.</p>
+                </div>
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('technology')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6f91d05d-4b8b-4aea-b6c9-e9d43b0691bb.png" alt="Circuit board with glowing neon lights, a laptop with coding interface, and digital symbols hovering around illustrating computer programming and IT concepts" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Technology</h3>
+                    <p class="text-gray-600">Learn Coding.</p>
+                </div>
+                <div class="video-card bg-white rounded-lg shadow-md p-4 cursor-pointer" onclick="showVideo('art')">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6e7ce99c-f75e-4afe-8d71-77b8d3aa2b8c.png" alt="Canvas with vibrant paint strokes, brushes, and an artist's palette showcasing creative drawing and watercolor techniques" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Art</h3>
+                    <p class="text-gray-600">learn drawing sing this video.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Page -->
+        <section id="video-page" class="page hidden">
+            <button onclick="showPage('home')" class="mb-4 bg-gray-200 px-4 py-2 rounded">Back to Home</button>
+            <h2 id="video-title" class="text-2xl font-bold mb-4"></h2>
+            <div class="flex flex-col lg:flex-row">
+                <!-- Video Player -->
+                <div class="lg:w-2/3 mb-6">
+                    <video id="video-player" class="video-player" controls>
+                        <source id="video-source" src="" type="video/mp4">
+                    </video>
+                    <p class="mt-4 text-gray-700" id="video-description"></p>
+                </div>
+                <div class="lg:w-1/3 lg:pl-6">
+                    <h3 class="text-xl font-semibold mb-4">Lessons in this Topic</h3>
+                    <div id="lesson-list" class="lesson-list"></div>
+                    <h3 class="text-xl font-semibold mt-6 mb-4">Quick Quiz</h3>
+                    <div id="quiz-container"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const videoData = {
+            math: {
+                title: 'Introduction to Algebra',
+                description: 'This video covers the basics of algebra, including variables, equations, and inequalities. Perfect for beginners.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder, replace with actual
+                lessons: ['Variables and Constants', 'Solving Equations', 'Inequalities', 'Applications in Real Life'],
+                quiz: [
+                    {
+                        question: 'What is a variable?',
+                        options: ['A fixed number', 'A placeholder for unknown values', 'A type of equation'],
+                        answer: 1
+                    },
+                    {
+                        question: 'What does an inequality symbol represent?',
+                        options: ['Equality', 'Greater than or less than', 'Addition'],
+                        answer: 1
+                    }
+                ]
+            },
+            science: {
+                title: 'Physics Fundamentals',
+                description: 'Explore the laws of motion, gravity, and energy in this comprehensive physics overview.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder
+                lessons: ['Newton\'s Laws', 'Gravity', 'Energy and Work', 'Thermodynamics'],
+                quiz: [
+                    {
+                        question: 'What is the first law of motion?',
+                        options: ['An object in motion stays in motion', 'Force equals mass times acceleration', 'Every action has a reaction'],
+                        answer: 0
+                    },
+                    {
+                        question: 'What force keeps us on the ground?',
+                        options: ['Magnetism', 'Gravity', 'Electricity'],
+                        answer: 1
+                    }
+                ]
+            },
+            history: {
+                title: 'Ancient Civilizations',
+                description: 'Journey through the rise and fall of ancient civilizations like Egypt, Rome, and Greece.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder
+                lessons: ['Ancient Egypt', 'Roman Empire', 'Greek Philosophy', 'Fall of Civilizations'],
+                quiz: [
+                    {
+                        question: 'Who built the pyramids?',
+                        options: ['Romans', 'Greeks', 'Egyptians'],
+                        answer: 2
+                    },
+                    {
+                        question: 'What is democracy attributed to?',
+                        options: ['Egypt', 'Rome', 'Greece'],
+                        answer: 2
+                    }
+                ]
+            },
+            literature: {
+                title: 'Shakespearean Literature',
+                description: 'Delve into the works of William Shakespeare, including plays and sonnets.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder
+                lessons: ['Sonnet 18', 'Hamlet Overview', 'Macbeth Themes', 'Poetic Devices'],
+                quiz: [
+                    {
+                        question: 'What is a sonnet?',
+                        options: ['A play', 'A 14-line poem', 'A novel'],
+                        answer: 1
+                    },
+                    {
+                        question: 'Who wrote Hamlet?',
+                        options: ['Shakespeare', 'Poe', 'Dickens'],
+                        answer: 0
+                    }
+                ]
+            },
+            technology: {
+                title: 'Introduction to Coding',
+                description: 'Learn the basics of programming with Python, including syntax and logic.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder
+                lessons: ['Basic Syntax', 'Control Structures', 'Functions', 'Object-Oriented Programming'],
+                quiz: [
+                    {
+                        question: 'What is a loop?',
+                        options: ['A data type', 'Repetitive structure', 'Math equation'],
+                        answer: 1
+                    },
+                    {
+                        question: 'What does IDE stand for?',
+                        options: ['Integrated Development Environment', 'Instant Debug Editor', 'Internet Data Exchange'],
+                        answer: 0
+                    }
+                ]
+            },
+            art: {
+                title: 'Watercolor Techniques',
+                description: 'Master the art of watercolor painting with step-by-step techniques and tips.',
+                videoSrc: 'https://www.sample-videos.com/file/1080p/mp4/mp41080.mp4', // Placeholder
+                lessons: ['Color Mixing', 'Brush Techniques', 'Composition', 'Drying and Fixing'],
+                quiz: [
+                    {
+                        question: 'What is wash in watercolor?',
+                        options: ['A type of brush', 'Large area of color', 'Drying method'],
+                        answer: 1
+                    },
+                    {
+                        question: 'What paper is best for watercolor?',
+                        options: ['Printer paper', 'Smooth paper', 'Watercolor paper'],
+                        answer: 2
+                    }
+                ]
+            }
+        };
+
+        let currentTopic = '';
+
+        function showPage(page) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.add('hidden'));
+            document.getElementById(page).classList.remove('hidden');
+            if (page === 'home') {
+                window.history.pushState({}, '', '#home');
+            }
+        }
+
+        function showVideo(topic) {
+            currentTopic = topic;
+            const data = videoData[topic];
+            document.getElementById('video-title').textContent = data.title;
+            document.getElementById('video-description').textContent = data.description;
+            document.getElementById('video-source').src = data.videoSrc;
+            document.getElementById('video-player').load();
+
+            // Load lessons
+            const lessonList = document.getElementById('lesson-list');
+            lessonList.innerHTML = '';
+            data.lessons.forEach(lesson => {
+                const li = document.createElement('div');
+                li.className = 'lesson-item';
+                li.textContent = lesson;
+                li.onclick = () => alert(`Lesson: ${lesson} - Full content coming soon!`);
+                lessonList.appendChild(li);
+            });
+
+            // Load quiz
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+            data.quiz.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'quiz-question';
+                qDiv.innerHTML = `<p><strong>${q.question}</strong></p>`;
+                q.options.forEach((option, optIndex) => {
+                    const opt = document.createElement('span');
+                    opt.className = 'quiz-option';
+                    opt.textContent = option;
+                    opt.onclick = () => {
+                        const opts = qDiv.querySelectorAll('.quiz-option');
+                        opts.forEach(o => o.classList.remove('selected'));
+                        opt.classList.add('selected');
+                        if (optIndex === q.answer) {
+                            alert('Correct!');
+                        } else {
+                            alert('Incorrect. Try again.');
+                        }
+                    };
+                    qDiv.appendChild(opt);
+                });
+                quizContainer.appendChild(qDiv);
+            });
+
+            showPage('video-page');
+            window.history.pushState({}, '', `#video/${topic}`);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        window.onpopstate = () => {
+            const hash = window.location.hash;
+            if (hash === '#home') {
+                showPage('home');
+            } else if (hash.startsWith('#video/')) {
+                const topic = hash.split('/')[1];
+                if (videoData[topic]) {
+                    showVideo(topic);
+                }
+            }
+        };
+
+        showPage('home');
+    </script>
+</body>
+</html>

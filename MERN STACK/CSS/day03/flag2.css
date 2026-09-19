@@ -1,0 +1,27 @@
+body{
+    position: relative;
+}
+#red{
+    height: 400px;
+    width: 600px;
+    background-color: red;
+    position: absolute;
+    top: 160px;
+    left: 30%;
+}
+#blue{
+    height: 50%;
+    width: 100%;
+    background-color: blue;
+    position: absolute;
+    bottom: 100px;
+}
+#circle{
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    background-color: white;
+    top: 20px;
+    left: 220px;
+    position: absolute;
+}

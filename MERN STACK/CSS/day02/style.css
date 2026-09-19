@@ -1,0 +1,15 @@
+h1{
+    height: 300px;
+    width: 300px;
+    background-color: rgb(244, 146, 27);
+    border: 15px solid green;
+}
+h2{
+    background-color: pink;
+    border: 5px solid blue;
+}
+p{
+    background-color: aqua;
+    border: 5px solid blue;
+    margin: 10px;
+}

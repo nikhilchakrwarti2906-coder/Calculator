@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 20px;
+}
+.box{
+    height: 150px;
+    width: 150px;
+    background-color: salmon;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 2s;
+    border: 1px solid salmon;
+    transition-timing-function: ease-out;
+}
+.box:hover{
+    background-color: blue;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+}

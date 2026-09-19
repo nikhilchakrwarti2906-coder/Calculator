@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+}
+body,html{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    font-size: 40px;
+}
+.container{
+    display: grid;
+    height: 800px;
+    width: 1200px;
+    gap: 20px;
+    padding: 10px;
+    grid-template-rows:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
+}
+.box{
+    background-color: rgb(95,95,226);
+}
+.first{
+    grid-row: 1/4;
+}
+.second{
+    grid-column: 2/4;
+}
+.sixth{
+    grid-row:2/4;
+    grid-column: 4/5;
+}
